@@ -1,0 +1,87 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "4e880a56-c91b-3fca-a8a1-085b6d4202a5",
+              "name": "Undescribed Security Group Rule Vulnerability",
+              "helpUri": "https://www.glog.ai/",
+              "help": {
+                "text": "",
+                "markdown": "## Description\n\nThe \"Undescribed Security Group Rule Vulnerability\" in Terraform refers to the situation where a security group rule is not adequately described or defined, leading to potential security risks. In the provided code example, the egress rule allows all outbound traffic from port 27017 to port 65345 for all IP addresses (0.0.0.0/0 in CIDR notation). This is a security concern because it exposes the system to potential attacks from any IP address.\n\n## Security Concern\n\nThis vulnerability is a security concern because it allows all outbound traffic to any IP address. This means that if an attacker gains access to the system, they can send data to any IP address without any restrictions. This could lead to data leakage, system compromise, or other security incidents.\n\n## Mitigation Advice\n\nTo mitigate this vulnerability, it is recommended to limit the scope of the egress rule. This can be done by specifying a narrower range of IP addresses in the `cidr_blocks` parameter. Additionally, consider limiting the range of ports that the rule applies to.\n\n## Source Code Fix Recommendation\n\nHere is a fixed version of the code:\n\n```hcl\negress {\n    from_port   = 27017\n    protocol    = \"TCP\"\n    to_port     = 65345\n    cidr_blocks = [\"192.0.2.0/24\"]  // replace with your IP range\n}\n```\n\nIn this example, the `cidr_blocks` parameter is set to a specific range of IP addresses (192.0.2.0/24 in CIDR notation), which limits the scope of the egress rule.\n\n## Library Dependencies\n\nThe provided code example is written in HCL (HashiCorp Configuration Language), which is used by Terraform. Therefore, it does not have any library dependencies.\n\n## References\n\n- [Common Weakness Enumeration (CWE-16)](https://cwe.mitre.org/data/definitions/16.html)"
+              },
+              "properties": {
+                "cwe": [
+                  {
+                    "id": "CWE-16",
+                    "url": "https://cwe.mitre.org/data/definitions/16.html"
+                  }
+                ],
+                "severity": "LOW",
+                "kind": "FAIL",
+                "tags": [
+                  "CWE-16"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "4e880a56-c91b-3fca-a8a1-085b6d4202a5",
+          "kind": "fail",
+          "level": "note",
+          "message": {
+            "text": "Undescribed Security Group Rule Vulnerability"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "main.tf"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 3,
+                  "endLine": 76,
+                  "endColumn": 3,
+                  "snippet": {
+                    "text": "egress {\n    from_port   = 27017\n    protocol    = \"TCP\"\n    to_port     = 65345\n    cidr_blocks = [\"0.0.0.0/0\"]\n  }"
+                  }
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "glog-pfp-ruleFileLineCode/v1": "fe093aefd8ed85a1b402636b17d2e2053de5ded40676111ced55b3bc978d3567",
+            "glog-pfp-ruleFileCode/v1": "48b2efd814b75a2fcf3b0f6f60d3436088f7d93c3152b8ef42932cbf152b6ca7"
+          },
+          "fingerprints": {
+            "glog-fp-ruleFileCode/v1": "48b2efd814b75a2fcf3b0f6f60d3436088f7d93c3152b8ef42932cbf152b6ca7"
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
